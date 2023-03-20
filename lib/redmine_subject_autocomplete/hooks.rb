@@ -3,7 +3,7 @@ module RedmineSubjectAutocomplete
   class Hooks < Redmine::Hook::ViewListener
     def view_issues_form_details_bottom(context)
 
-      path = (config.relative_url_root || '') + url_for({controller: 'subject_autocomplete', action: 'get_matches'}) + "?project_id=#{context[:project][:id]}"
+      path = url_for({controller: 'subject_autocomplete', action: 'get_matches', project_id: context.try(:[], :project).try(:[], :id)})
       translations = {
         "placeholder_text" => I18n.translate(:placeholder_text)
       }
