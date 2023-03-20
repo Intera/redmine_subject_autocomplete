@@ -67,9 +67,9 @@ class SubjectAutocompleteController < ApplicationController
   private
 
   def find_project
-    if params[:project_id].present?
-      @project = Project.find(params[:project_id])
-    end
+    return if params[:project_id].blank?
+
+    @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end
